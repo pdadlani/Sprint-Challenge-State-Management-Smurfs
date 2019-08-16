@@ -8,6 +8,10 @@ export const POST_SMURFS_START = 'POST_SMURFS_START';
 export const POST_SMURFS_SUCCESS = 'POST_SMURFS_SUCCESS';
 export const POST_SMURFS_FAILURE = 'POST_SMURFS_FAILURE';
 
+export const PUT_SMURFS_START = 'PUT_SMURFS_START';
+export const PUT_SMURFS_SUCCESS = 'PUT_SMURFS_SUCCESS';
+export const PUT_SMURFS_FAILURE = 'PUT_SMURFS_FAILURE';
+
 export const getData = () => dispatch => {
   console.log('getData is called');
   dispatch({ type: GET_SMURFS_START });
@@ -31,5 +35,17 @@ export const postData = newSmurf => dispatch => {
     })
     .catch(err => {
       dispatch({ type: POST_SMURFS_FAILURE, payload: err.response })
+    })
+}
+
+export const putData = (smurf, id) => dispatch => {
+  dispatch({ type: PUT_SMURFS_START });
+  axios
+    .put(`http://localhost:3333/smurfs/${id}`, smurf)
+    .then(res => {
+      dispatch({ type: PUT_SMURFS_SUCCESS, payload: res.data})
+    })
+    .catch(err => {
+      dispatch({ type: PUT_SMURFS_FAILURE, payload: err.response })
     })
 }

@@ -18,7 +18,7 @@ const SmurfsList = props => {
 
   return (
     <div className='smurfs-list'>
-      Smurfs List
+      <h2>Smurfs Village Members</h2>
       {props.smurfs.map(smurf => <Smurf key={smurf.id} smurf={smurf} />)}
     </div>
   );

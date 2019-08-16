@@ -14,6 +14,11 @@ const SmurfForm = props => {
     event.preventDefault();
     props.postData(newSmurf);
     props.getData(props.smurfs);
+    setNewSmurf({
+      name: '',
+      age: 0,
+      height: ''
+    })
   }
 
   const handleChange = event => {
@@ -23,6 +28,7 @@ const SmurfForm = props => {
   return (
     <div className='smurf-form'>
       <form onSubmit={handleSubmit}>
+        <h2>Add a Smurf</h2>
         <input 
           type='text'
           name='name'
@@ -31,7 +37,7 @@ const SmurfForm = props => {
           onChange={handleChange}
         />
         <input
-          type='number'
+          type='text'
           name='age'
           value={newSmurf.age}
           placeholder='enter age of smurf'
