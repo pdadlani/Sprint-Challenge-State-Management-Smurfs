@@ -12,6 +12,10 @@ export const PUT_SMURFS_START = 'PUT_SMURFS_START';
 export const PUT_SMURFS_SUCCESS = 'PUT_SMURFS_SUCCESS';
 export const PUT_SMURFS_FAILURE = 'PUT_SMURFS_FAILURE';
 
+export const DELETE_SMURFS_START = 'DELETE_SMURFS_START';
+export const DELETE_SMURFS_SUCCESS = 'DELETE_SMURFS_SUCCESS';
+export const DELETE_SMURFS_FAILURE = 'DELETE_SMURFS_FAILURE';
+
 export const getData = () => dispatch => {
   console.log('getData is called');
   dispatch({ type: GET_SMURFS_START });
@@ -47,5 +51,18 @@ export const putData = (smurf, id) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: PUT_SMURFS_FAILURE, payload: err.response })
+    })
+}
+
+export const deleteData = (id) => dispatch => {
+  dispatch({ type: DELETE_SMURFS_START });
+  axios
+    .delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      console.log(res.data);
+      dispatch({ type: DELETE_SMURFS_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_SMURFS_FAILURE, payload: err.response })
     })
 }

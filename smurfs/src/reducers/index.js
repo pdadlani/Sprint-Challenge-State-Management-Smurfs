@@ -7,7 +7,10 @@ import {
   POST_SMURFS_FAILURE,
   PUT_SMURFS_START,
   PUT_SMURFS_SUCCESS,
-  PUT_SMURFS_FAILURE
+  PUT_SMURFS_FAILURE,
+  DELETE_SMURFS_START,
+  DELETE_SMURFS_SUCCESS,
+  DELETE_SMURFS_FAILURE
 } from '../actions';
 
 const initialState = {
@@ -15,6 +18,7 @@ const initialState = {
   getSmurfs: false,
   postSmurfs: false,
   putSmurfs: false,
+  deleteSmurf: false,
   error: ''
 }
 
@@ -76,6 +80,25 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         putSmurfs: false,
+        error: action.payload
+      }
+    case DELETE_SMURFS_START:
+      return {
+        ...state,
+        error: '',
+        deleteSmurfs: true
+      }
+    case DELETE_SMURFS_SUCCESS:
+      return {
+        ...state,
+        error: '',
+        deleteSmurfs: false,
+        smurfs: state.smurfs.filter(smurf => smurf.id !== action.payload.id)
+      }
+    case DELETE_SMURFS_FAILURE:
+      return {
+        ...state,
+        deleteSmurfs: false,
         error: action.payload
       }
     default:

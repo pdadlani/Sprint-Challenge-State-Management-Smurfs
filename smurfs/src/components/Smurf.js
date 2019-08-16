@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { putData, getData, postData } from '../actions';
+import { putData, getData, postData, deleteData } from '../actions';
 
 const Smurf = props => {
 
@@ -22,12 +22,14 @@ const Smurf = props => {
     event.preventDefault();
     props.putData(editInput, props.smurf.id)
     toggleEdit();
-    props.postData(editInput)
-    props.getData(props.smurfs)
+    props.postData(editInput);
+    props.getData(props.smurfs);
   };
 
   const handleDelete = () => {
     console.log('handleDelete called');
+    props.deleteData(props.smurf.id);
+    props.getData(props.smurfs);
   }
 
   console.log('edit', isEditing);
@@ -82,4 +84,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { putData, getData, postData })(Smurf);
+export default connect(mapStateToProps, { putData, getData, postData, deleteData })(Smurf);
